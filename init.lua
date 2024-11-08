@@ -1,12 +1,12 @@
 require ("sky")
-vim.g.mapleader = " " 
+vim.g.mapleader = " "
 vim.opt.guicursor = ""
 
 vim.opt.relativenumber = true
 vim.opt.nu = true
 
 -- Just tab inditiation
-vim.opt.tabstop = 4
+vim.opt.tabstop = 2
 vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
 vim.opt.expandtab = true
@@ -27,8 +27,9 @@ vim.opt.scrolloff = 10
 vim.opt.signcolumn = "yes"
 
 vim.opt.updatetime = 50
-vim.opt.colorcolumn = "80"
+--vim.opt.colorcolumn = "80"
 vim.opt.termguicolors = true
 
 -- clipboard copy
 vim.opt.clipboard = "unnamedplus"
+vim.o.pumheight = 2
