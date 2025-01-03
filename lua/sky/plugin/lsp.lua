@@ -23,6 +23,8 @@ return {
         "clangd",        -- C/C++
         "rust_analyzer", -- Rust
         "lua_ls",       -- Lua
+        "pylsp",        -- Python
+        "gopls"
       },
       automatic_installation = true,
     },
@@ -34,23 +36,23 @@ return {
       "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
-      local lspconfig = require("lspconfig")
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-      -- Lua
-      lspconfig.lua_ls.setup({
-        capabilities = capabilities,
-        settings = {
-          Lua = {
-            diagnostics = {
-              globals = { "vim" }, -- Recognize vim global
-            },
-          },
-        },
+        vim.diagnostic.config({
+        virtual_text = false,  -- Disable inline diagnostics
+        signs = false,         -- Disable gutter signs
+        underline = false,     -- Disable underline
+        update_in_insert = false,
+        severity_sort = false,
+        refreshSupport = false,
       })
 
+      local lspconfig = require("lspconfig")
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      local on_attach = function(client)
+        client.server_capabilities.diagnosticProvider = false  -- Disable diagnostics
+      end
+
       -- Python
-      lspconfig.pyright.setup({
+      lspconfig.pylsp.setup({
         capabilities = capabilities,
       })
 
@@ -66,17 +68,17 @@ return {
           "--function-arg-placeholders",
         },
       })
+    lspconfig.gopls.setup({
+        capabilities = capabilities,
+        virtual_text = false,
+        cmd = {
+            "gopls"
+        }
+    })
 
       -- Rust
       lspconfig.rust_analyzer.setup({
         capabilities = capabilities,
-        settings = {
-          ['rust-analyzer'] = {
-            checkOnSave = {
-              command = "clippy",
-            },
-          },
-        },
       })
     end
   },

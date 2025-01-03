@@ -33,3 +33,7 @@ vim.opt.termguicolors = true
 -- clipboard copy
 vim.opt.clipboard = "unnamedplus"
 vim.o.pumheight = 2
+
+
+-- vimtex
+
