@@ -10,6 +10,7 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
 vim.opt.expandtab = true
+vim.opt.laststatus = 0
 
 vim.opt.smartindent = true
 
@@ -34,6 +35,5 @@ vim.opt.termguicolors = true
 vim.opt.clipboard = "unnamedplus"
 vim.o.pumheight = 2
 
-
--- vimtex
-
+vim.keymap.set("n", "<C-a>", "<Nop>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-x>", "<Nop>", { noremap = true, silent = true })

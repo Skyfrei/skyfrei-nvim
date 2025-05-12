@@ -10,19 +10,10 @@ return {
         "rust-analyzer",      -- Rust
         "black",             -- Python formatter
         "stylua",            -- Lua formatter
-        "lua-language-server" -- Lua
-      },
-    },
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    opts = {
-      ensure_installed = {
-        "rust_analyzer", -- Rust
-        "lua_ls",       -- Lua
+        "lua-language-server", -- Lua
         "pylsp",        -- Python
       },
-      automatic_installation = true,
+        automatic_installation = true,
     },
   },
   {
