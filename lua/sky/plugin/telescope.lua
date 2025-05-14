@@ -30,6 +30,11 @@ return {
       vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Find buffers' })
       vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Help tags' })
       vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = 'Find word under cursor' })
+
+        vim.keymap.set('n', '<leader>an', function()
+        builtin.find_files{
+            cwd = vim.fn.stdpath("config")
+        }end,{ desc = "Check nvim dir"})
     end,
   }
 }
