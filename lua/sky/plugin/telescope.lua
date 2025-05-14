@@ -34,7 +34,7 @@ return {
         vim.keymap.set('n', '<leader>an', function()
         builtin.find_files{
             cwd = vim.fn.stdpath("config")
-        }end,{ desc = "Check nvim dir"})
+        }end,{ desc = "At nvim"})
     end,
   }
 }
