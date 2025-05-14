@@ -37,3 +37,5 @@ vim.o.pumheight = 2
 
 vim.keymap.set("n", "<C-a>", "<Nop>", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-x>", "<Nop>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>x", ":lua<CR>")
+
