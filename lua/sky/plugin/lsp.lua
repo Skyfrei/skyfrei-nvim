@@ -7,7 +7,6 @@ return {
     opts = {
       ensure_installed = {
         "clang-format",       -- C/C++ formatter
-        "rust-analyzer",      -- Rust
         "black",             -- Python formatter
         "stylua",            -- Lua formatter
         "lua-language-server", -- Lua
@@ -42,11 +41,7 @@ return {
       lspconfig.pylsp.setup({
         capabilities = capabilities,
       })
-      -- Rust
-      lspconfig.rust_analyzer.setup({
-        capabilities = capabilities,
-      })
-    end
+     end
   },
   {
     "hrsh7th/nvim-cmp",
