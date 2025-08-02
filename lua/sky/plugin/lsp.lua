@@ -16,6 +16,7 @@ return {
       ensure_installed = {
         "clang-format",       -- C/C++ formatter
         "rust-analyzer", 
+        "nixd",
       },
         automatic_installation = true,
     },
@@ -55,6 +56,15 @@ return {
       lspconfig.rust_analyzer.setup({
         capabilities = capabilities,
         on_attach = on_attach,
+
+        })
+
+      lspconfig.nixd.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+        formatting = {
+                command = { "nixd" },
+        },
         })
      end
   },
