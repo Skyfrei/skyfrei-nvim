@@ -10,7 +10,6 @@ return {
       "hrsh7th/cmp-cmdline",
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
-
     },
     opts = {
       ensure_installed = {
@@ -32,6 +31,8 @@ return {
       local lspconfig = require("lspconfig")
     local cmp = require('cmp')
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+
 
         cmp.setup({
             snippet = {
@@ -57,33 +58,31 @@ return {
         capabilities = capabilities,
         on_attach = on_attach,
 
+
+
         })
+
 
       lspconfig.nixd.setup({
         capabilities = capabilities,
         on_attach = on_attach,
         formatting = {
-                command = { "nixd" },
+            command = { "nixd" },
         },
         })
      end
   },
---  {
---    "williamboman/mason.nvim",
---    cmd = "Mason",
---    keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
---    build = ":MasonUpdate",
---    opts = {
---      ensure_installed = {
---        "clang-format",       -- C/C++ formatter
---        "black",             -- Python formatter
---        "stylua",            -- Lua formatter
---        "lua-language-server", -- Lua
---        "rust-analyzer", 
---        "pylsp",        -- Python
---      },
---        automatic_installation = true,
---    },
---  },
+ -- {
+ --   "williamboman/mason.nvim",
+ --   dependencies = {
+ --     "williamboman/mason-lspconfig.nvim",
+ --   },
+ --   config = function()
+ --     require("mason").setup()
+ --     require("mason-lspconfig").setup({
+ --       ensure_installed = {"rust-analyzer"},
+ --     })
+ --   end,
+ -- }
 
 }

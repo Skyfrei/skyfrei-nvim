@@ -22,7 +22,7 @@ return {
       })
       
       -- Enable fzf native sorter
-      telescope.load_extension("fzf")
+      --telescope.load_extension("fzf")
       
       -- Essential keymaps
       vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Find files' })

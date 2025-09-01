@@ -5,7 +5,8 @@ return {
       local configs = require("nvim-treesitter.configs")
 
       configs.setup({
-          ensure_installed = { "c","tlaplus", "lua", "cpp", "rust", "python", "markdown"},
+          ensure_installed = { "c", "lua", "cpp", "rust", "toml", "python"},
+            auto_install = true,
           sync_install = false,
           highlight = { enable = true },
           indent = { enable = true },  
