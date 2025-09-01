@@ -13,63 +13,56 @@ return {
     },
     opts = {
       ensure_installed = {
-        "clang-format",       -- C/C++ formatter
-        "rust-analyzer", 
+        "clang-format",
+        "rust-analyzer",
         "nixd",
+        "lua_ls"
       },
-        automatic_installation = true,
+    automatic_installation = true,
     },
 
     config = function()
-    vim.diagnostic.config({
-            virtual_text = true,
-            signs = true,
-            --underline = true,
-            autocomplete = true,
-        })
 
-      local lspconfig = require("lspconfig")
+    local lspconfig = require("lspconfig")
     local cmp = require('cmp')
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+    local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-
-
-        cmp.setup({
-            snippet = {
-                expand = function(args)
-                    require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-                end,
-            },
-            mapping = cmp.mapping.preset.insert({
-                ['<C-k>'] = cmp.mapping.select_prev_item(cmp_select),
-                ['<C-j>'] = cmp.mapping.select_next_item(cmp_select),
-            }),
-            sources = cmp.config.sources({
-                { name = 'nvim_lsp' },
-            })
-        })
-
-      -- Python
-      lspconfig.pylsp.setup({
-        capabilities = capabilities,
-      })
-
-      lspconfig.rust_analyzer.setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-
-
-
-        })
-
-
-      lspconfig.nixd.setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-        formatting = {
-            command = { "nixd" },
+    cmp.setup({
+        snippet = {
+            expand = function(args)
+                require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+            end,
         },
+        mapping = cmp.mapping.preset.insert({
+            ['<C-k>'] = cmp.mapping.select_prev_item(cmp_select),
+            ['<C-j>'] = cmp.mapping.select_next_item(cmp_select),
+        }),
+        sources = cmp.config.sources({
+            { name = 'nvim_lsp' },
         })
-     end
+    })
+
+    lspconfig.pylsp.setup({
+      capabilities = capabilities,
+    })
+
+    lspconfig.lua_ls.setup({
+      capabilities = capabilities,
+      on_attach = on_attach
+    })
+
+    lspconfig.rust_analyzer.setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
+
+    lspconfig.nixd.setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+      formatting = {
+          command = { "nixd" },
+      },
+    })
+    end
   },
 }
