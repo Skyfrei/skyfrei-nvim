@@ -13,33 +13,41 @@ return {
     },
 
     config = function()
-    local lsp = vim.lsp
-    local lsp_table = {'clangd'}
+        local lsp = vim.lsp
+        local buffer_stack = {}
+        local on_attach =  function(client, bufnr)
+            vim.keymap.set('n', 'gd', lsp.buf.type_definition)
+            vim.keymap.set('n', 'lr', lsp.buf.references)
+        end
+
+        local lsp_table = {'clangd'}
  
-    for _, server_name in ipairs(lsp_table) do
-        lsp.enable(server_name)
---        lsp.config[server_name] = {
---            cmd = {server_name},
---        }
-    end
+        for _, server_name in ipairs(lsp_table) do
+            lsp.config[server_name] = {
+                on_attach = on_attach,
+            }
+            
+            lsp.enable(server_name)
 
-    local cmp = require('cmp')
-    local capabilities = require("cmp_nvim_lsp").default_capabilities()
+        end
 
-    cmp.setup({
-        snippet = {
-            expand = function(args)
-                require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-            end,
-        },
-        mapping = cmp.mapping.preset.insert({
-            ['<C-k>'] = cmp.mapping.select_prev_item(cmp_select),
-            ['<C-j>'] = cmp.mapping.select_next_item(cmp_select),
-        }),
-        sources = cmp.config.sources({
-            { name = 'nvim_lsp' },
+        local cmp = require('cmp')
+        local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+        cmp.setup({
+            snippet = {
+                expand = function(args)
+                    require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+                end,
+            },
+            mapping = cmp.mapping.preset.insert({
+                ['<C-k>'] = cmp.mapping.select_prev_item(cmp_select),
+                ['<C-j>'] = cmp.mapping.select_next_item(cmp_select),
+            }),
+            sources = cmp.config.sources({
+                { name = 'nvim_lsp' },
+            })
         })
-    })
 
     end
   },
