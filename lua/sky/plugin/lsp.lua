@@ -11,19 +11,18 @@ return {
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
     },
-    opts = {
-      ensure_installed = {
-        "clang-format",
-        "rust-analyzer",
-        "nixd",
-        "lua_ls"
-      },
-    automatic_installation = true,
-    },
 
     config = function()
+    local lsp = vim.lsp
+    local lsp_table = {'clangd'}
+ 
+    for _, server_name in ipairs(lsp_table) do
+        lsp.enable(server_name)
+--        lsp.config[server_name] = {
+--            cmd = {server_name},
+--        }
+    end
 
-    local lspconfig = require("lspconfig")
     local cmp = require('cmp')
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
@@ -42,27 +41,6 @@ return {
         })
     })
 
-    lspconfig.pylsp.setup({
-      capabilities = capabilities,
-    })
-
-    lspconfig.lua_ls.setup({
-      capabilities = capabilities,
-      on_attach = on_attach
-    })
-
-    lspconfig.rust_analyzer.setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-
-    lspconfig.nixd.setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-      formatting = {
-          command = { "nixd" },
-      },
-    })
     end
   },
 }
