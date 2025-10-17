@@ -16,7 +16,8 @@ return {
         local lsp = vim.lsp
         local buffer_stack = {}
         local on_attach =  function(client, bufnr)
-            vim.keymap.set('n', 'gd', lsp.buf.type_definition)
+            vim.keymap.set('n', 'gd', lsp.buf.declaration)
+            vim.keymap.set('n', 'gD', lsp.buf.definition)
             vim.keymap.set('n', 'lr', lsp.buf.references)
         end
 
